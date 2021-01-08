@@ -68,9 +68,9 @@ export default class PostScreen extends React.Component {
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Ionicons name="md-arrow-back" size={24} color="#2F4F4F"></Ionicons>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.handlePost}>
-            <Text style={{ fontWeight: "500" }}>Post</Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={this.handlePost}>
+              <Text style={{ fontWeight: "500" }}>Post</Text>
+            </TouchableOpacity>
         </View>
 
         <View style={styles.inputContainer}>

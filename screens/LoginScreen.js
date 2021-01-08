@@ -31,15 +31,13 @@ export default class LoginScreen extends Component {
       LayoutAnimation.easeInEaseOut()
     return (
       <View style={styles.container}>
-          <StatusBar barStyle="light-content"></StatusBar>
-          <ImageBackground
+        <StatusBar barStyle="light-content"></StatusBar>       
+        <ImageBackground
           source={require('../assets/images/background.jpg')}
           style={{flex: 1,
             width: null,
             height: null,
-            justifyContent:'center'}}>
-
-         
+            justifyContent:'center'}}>       
         <Text style={styles.greeting}> {`Đăng nhập`} </Text>
         <View style={styles.errorMessage}>
     {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
@@ -52,7 +50,7 @@ export default class LoginScreen extends Component {
             value={this.state.email}></TextInput>
         </View>
         <View style={{marginTop:32}}>
-            <Text style={styles.inputTitle}>Password</Text>
+            <Text style={styles.inputTitle}>Mật khẩu</Text>
             <TextInput style={styles.input} autoCapitalize="none" secureTextEntry
             value={this.state.password}
             onChangeText={password=>this.setState({password})}></TextInput>
@@ -65,8 +63,8 @@ export default class LoginScreen extends Component {
       onPress={()=>this.props.navigation.navigate('Register')}>
         
         <Text style={{color:'#FFF',fontSize:12}}>
-           New to ComCharity? <Text style={{fontWeight:'500',color:'#8A89FE'}}>
-                Sign Up
+           Chưa có tài khoản? <Text style={{fontWeight:'500',color:'#8A89FE'}}>
+                Đăng ký
             </Text>
         </Text>
 

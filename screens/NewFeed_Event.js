@@ -5,11 +5,11 @@ import Fire from '../Fire'
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment'
 
-export default class HomeScreen extends Component {
+export default class NewFeed_Event extends Component {
                                                                                                                                                                                                                                                                                                                                                                                                                                             
 constructor(props){
   super(props)
-  this.ref =  Fire.shared.firestore.collection('posts')
+  this.ref =  Fire.shared.firestore.collection('events')
   this.useref=
   this.state={
     dataSource : []
@@ -17,49 +17,52 @@ constructor(props){
 
 }
 componentDidMount(){
-  this.unsubscribe = this.ref.onSnapshot(this.feedPosts);
+  this.unsubscribe = this.ref.onSnapshot(this.feedEvent);
 }
 
-feedPosts = (postSnapShot) =>{
-  const post = [];
+feedEvent = (postSnapShot) =>{
+  const Event = [];
   postSnapShot.forEach((doc) => {
-  const {uid,text,timestamp,image} = doc.data();
+  const {uid,EventText,EventLocation,EventStartDay,EventEndDay,timestamp} = doc.data();
   const data=Fire.shared.firestore
   .collection('users')
   .doc(uid)
   .get()
   .then(doc=>{
-    post.push({
+    Event.push({
       avatar:doc.data().avatar
       ,name:doc.data().name,
       uid,
-      text,
-      timestamp,
-      image
+      EventText,
+      EventLocation,
+      EventStartDay,
+      EventEndDay,
+      timestamp
     })
     this.setState({
-      dataSource : post,
+      dataSource : Event,
     });
   })
   
   }); 
 }
  
-renderPost=post=>{
+renderEvent=Event=>{
   return(
     <View style={styles.feedItem}>
-      <Image source={post.avatar?{uri:post.avatar}:require('../assets/images/avatar.png')} style={styles.avatar}/>
+      <Image source={Event.avatar?{uri:Event.avatar}:require('../assets/images/avatar.png')} style={styles.avatar}/>
       <View style={{flex:1}}>
       <View style={{flexDirection:'row',justifyContent:'space-between'
     ,alignItems:'center'}}>
       <View>
-  <Text style={styles.name}>{post.name?post.name:'yo'}</Text>
-  <Text style={styles.timestamp}>{moment(post.timestamp).fromNow()}</Text>
+  <Text style={styles.name}>{Event.name?Event.name:'yo'}</Text>
+  <Text style={styles.timestamp}>{moment(Event.timestamp).fromNow()}</Text>
       </View>
       <Ionicons name='ios-more' size={24} color='#73788B'/>
       </View>
-  <Text style={styles.post}>{post.text}</Text>
-  <Image source={{uri:post.image}} style={styles.postImage} resizeMode='cover'/>
+  <Text style={styles.post}>{Event.EventName}</Text>
+  <Text style={styles.post}>{Event.Address}</Text>
+  {/* <Image source={{uri:post.image}} style={styles.postImage} resizeMode='cover'/> */}
   <View style={{flexDirection:'row'}}>
     <Ionicons name='ios-heart-empty' size={24} color="#737888"
     style={{marginRight:16}}/>
@@ -81,7 +84,7 @@ renderPost=post=>{
       <View style={styles.container}>
        <View style={styles.header}>
          <Text style={styles.headerTitle}>
-            Feed
+            NewFeed
          </Text>
 
        </View>

@@ -3,7 +3,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { Image, ImageBackground, LayoutAnimation, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { Component } from 'react';
 
-import DropDownPicker from 'react-native-dropdown-picker';
+// import DropDownPicker from 'react-native-dropdown-picker';
 import Fire from '../Fire'
 import Icon from 'react-native-vector-icons/Feather';
 import {Ionicons} from '@expo/vector-icons'
@@ -21,7 +21,6 @@ export default class RegisterScreen extends Component {
 
     state = {
         user: {
-          type: '',
           name: '',
           email: '',
           password: '',
@@ -56,14 +55,13 @@ export default class RegisterScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content"></StatusBar>
+        <StatusBar barStyle="light-content"></StatusBar>     
         <ImageBackground
           source={require('../assets/images/background.jpg')}
           style={{flex: 1,
             width: null,
             height: null,
             justifyContent:'center'}}>
-        
         <TouchableOpacity style={styles.back} onPress={()=>this.props.navigation.navigate('Login')}>
             <Ionicons name='ios-arrow-round-back' size={32} color="#FFF"></Ionicons>
         </TouchableOpacity>
@@ -72,7 +70,7 @@ export default class RegisterScreen extends Component {
         <Text style={styles.greeting}> {`Đăng ký`} </Text>
             <TouchableOpacity style={styles.avatarPlaceholder}onPress={this.handlePickAvatar}>
                 <Image source={{uri:this.state.user.avatar}} style={styles.avatar}/>
-                <Ionicons name="ios-add" size={32} color="#FFF" style={{marginTop:6,marginLeft:2}}>
+                <Ionicons name="ios-add" size={25} color="#FFF" >
 
                 </Ionicons>
             </TouchableOpacity>
@@ -84,7 +82,7 @@ export default class RegisterScreen extends Component {
      
       <View style={styles.form}>
       <View>
-            <Text style={styles.inputTitle}>Name</Text>
+            <Text style={styles.inputTitle}>Tên</Text>
             <TextInput style={styles.input} autoCapitalize="none"
             onChangeText={name=> this.setState({ user: { ...this.state.user, name } })}
             value={this.state.user.name}></TextInput>
@@ -97,44 +95,28 @@ export default class RegisterScreen extends Component {
             value={this.state.user.email}></TextInput>
         </View>
         <View style={{marginTop:16}}>
-            <Text style={styles.inputTitle}>Password</Text>
+            <Text style={styles.inputTitle}>Mật khẩu</Text>
             <TextInput style={styles.input} autoCapitalize="none" secureTextEntry
             value={this.state.user.password}
             onChangeText={password=>this.setState({ user:{...this.state.user,password }})}></TextInput>
         </View>
-        <View style={{marginTop:16}}>
-        <DropDownPicker
-    items={[
-        {label: 'Person charity', value: 'Person charity'},
-        {label: 'Person supported', value: 'Person supported'},
-        {label: 'Charity organization', value: 'Charity organization'},
-    ]}
-    containerStyle={{height: 40}}
-    style={{backgroundColor: '#fafafa'}}
-    itemStyle={{
-        justifyContent: 'flex-start'
-    }}
-    dropDownStyle={{backgroundColor: '#fafafa'}}
-    onChangeItem={item => this.setState({
-        type: {...this.state.user, type}
-    })}
-/>
-        </View>
+        
       </View>
       <TouchableOpacity style={styles.button} onPress={this.handleSignup}>
-          <Text style={{color:'#FFF',fontWeight:'500'}}>Sign up</Text>
+          <Text style={{color:'#FFF',fontWeight:'500'}}>Đăng ký</Text>
       </TouchableOpacity>
       <TouchableOpacity 
       style={{alignSelf:'center',marginTop:32}}
       onPress={()=>this.props.navigation.navigate('Login')}>
         
         <Text style={{color:'#FFF',fontSize:12}}>
-           Already have an account? <Text style={{fontWeight:'500',color:'#8A89FE'}}>
-                Sign In
+           Đã có tài khoản? <Text style={{fontWeight:'500',color:'#8A89FE'}}>
+                Đăng nhập
             </Text>
         </Text>
 
       </TouchableOpacity>
+      
       </View>
       </ImageBackground>
       </View>
@@ -146,14 +128,13 @@ export default class RegisterScreen extends Component {
 const styles=StyleSheet.create({
   container:{
     flex:1,
-   
+    backgroundColor: '#FFF'
   },
   greeting:{
-      marginTop:12,
       fontSize:25,
       fontWeight:'400',
       textAlign:'center',
-      color:'#FFF'
+      color: '#FFF'
   },
   errorMessage:{
       marginTop:6,
@@ -162,7 +143,7 @@ const styles=StyleSheet.create({
       marginHorizontal:30
   },
   form:{
-    marginTop:210,
+    marginTop:200,
     marginHorizontal:30
   },
   inputTitle:{
@@ -207,9 +188,9 @@ const styles=StyleSheet.create({
       justifyContent:'center'
   },
   avatarPlaceholder: {
-    width: 100,
-    height: 100,
-    backgroundColor: '#e1e2e6',
+    width: 80,
+    height: 80,
+    backgroundColor: '#696969',
     borderRadius: 50,
     marginTop: 48,
     justifyContent: 'center',
@@ -217,8 +198,8 @@ const styles=StyleSheet.create({
   },
   avatar: {
     position: 'absolute',
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderRadius: 50
   }
 

@@ -4,7 +4,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import React, { Component } from 'react';
 
 import Fire from '../Fire'
-import firebase from 'firebase/app';
+import firebase from 'firebase/app';  
 
 export default class LoadingScreen extends Component {
                    

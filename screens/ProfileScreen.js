@@ -49,12 +49,7 @@ export default class ProfileScreen extends Component {
     return (
       <View style={styles.container}>
        <View style={{marginTop:63,alignItems:'center'}}>
-         <TouchableOpacity style={styles.avatarContainer}onPress={this.handlePickAvatar}>
-                <Image source={{uri:this.state.user.avatar}} style={styles.avatar}/>
-                <Ionicons name="ios-add" size={32} color="#2F4F4F" style={{marginTop:6,marginLeft:2}}>
-
-                </Ionicons>
-            </TouchableOpacity>
+         
     <Text style={styles.name}>{this.state.user.name}</Text>
       <View style={styles.statsContainer}>
 

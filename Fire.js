@@ -22,12 +22,33 @@ class Fire{
             .then(ref=>{
                 res(ref)
             })
-            .catch(error=>{
+            .catch(error=>{ 
                 rej(error)
             })
             
         })
     }
+    addEvent =async({EventText,EventLocation,EventStartDay,EventEndDay,localUri})=>{
+         const remoteUri=await this.uploadPhotoAsync(localUri,`photos/${this.uid}/${Date.now()}`)
+        return new Promise((res,rej)=>{
+            this.firestore.collection('events').add({
+                EventText,
+                EventLocation,
+                image:remoteUri,
+                EventStartDay,
+                EventEndDay,
+                uid:this.uid,
+            })
+            .then(ref=>{
+                res(ref)
+            })
+            .catch(error=>{ 
+                rej(error)
+            })
+            
+        })
+    }
+   
 
     uploadPhotoAsync =async (uri,filename)=>{
         const path=`photos/${this.uid}/${Date.now()}.jpg`
@@ -57,9 +78,12 @@ createUSer=async user=>{
         await firebase.auth().createUserWithEmailAndPassword(user.email,user.password)
         let db=this.firestore.collection('users').doc(this.uid)
         db.set({
+            
             name:user.name,
             email:user.email,
-            avatar:null
+            avatar:null,
+            type: user.type
+            
         })
         if(user.avatar){
             remoteUri=await this.uploadPhotoAsync(user.avatar,`avatars/${this.uid}`)
